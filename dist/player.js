@@ -143,8 +143,8 @@ v1.0.0
             0);
         },
         setupFlashPlayer: function(video) {
-		
             powerplayer(video.divid).setup({
+				baseUrl: video.weburlparam+'/web/player/powerplayer6',
                 modes: [
                 {type: "flash", src: video.weburlparam+'/web/player/powerplayer6/powerplayer.swf'},
                 {type: "html5"}
