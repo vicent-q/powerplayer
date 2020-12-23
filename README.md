@@ -4,7 +4,7 @@
 1. 支持HTML5/Flash自动切换；
 2. 支持mp4/flv/hls/dash格式；
 3. 支持http-flv、hls、dash直播流；
-4. 支持hlv+h265、hls+h265解析并播放；
+4. 支持flv+h265、hls+h265解析并播放；
 5. 支持VR；
 6. 支持跳过片头片尾；
 7. 支持多码率平滑切换；
