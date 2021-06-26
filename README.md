@@ -39,3 +39,26 @@
 2020-11-25 6.0.20
 1. 修复p2phls模式时，多码率集群环境下，无法启用p2p
 2. 修复hls集群环境时，断点续播功能；
+
+## Getting Started
+```html
+<script type='text/javascript' src='./dist/powerplayer.js'></script>
+<div id="preview" style="width: 100%; height: 100%; margin:0 auto; background-color: #000000"></div>
+<script>
+    powerplayer('preview').setup({
+        baseUrl: './dist',
+        modes: [
+        {type: "html5"},
+        {type: "flash", src: "dist/powerplayer.swf"}
+        ],
+        skin: 'dist/skin.zip',
+        plugins: 'dist/shortcuts.swf,dist/captions.swf',
+        file: 'http://example.com/video.mp4',
+        width: '100%',
+        height: '100%',
+        backcolor: '161616',
+        autostart: true,
+        provider: 'http'
+    });
+</script>
+```
