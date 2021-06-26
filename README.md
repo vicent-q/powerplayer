@@ -62,3 +62,17 @@
     });
 </script>
 ```
+
+### Config
+
+| Field                            | Type      | Default                      | Description                              |
+| -------------------------------- | --------- | ---------------------------- | ---------------------------------------- |
+| `provider?`                      | `string`  | `''`                         | http,hls,sound,p2p,p2plive,rtmp,flvlive  |
+| `backupservers?`                 | `string`  | `''`                         | 集群服务器，如192.168.0.3,192.168.0.4     |
+| `video360?`                      | `number`  | `0`                          | 0就是不是全景   1代表全景                  |
+| `seamless?`                      | `boolean` | `true`                       | 是否无缝切换，默认true启用                 |
+| `lastplayposition?`              | `number`  | ``                           | 用户播放记录                |
+| `seekdisabled?`                  | `boolean` | `true`                       | 是否允许拖拽进度                |
+| `showthumbnails?`                | `boolean` | `true`                       | 是否显示预览图                |
+| `bulletscreen?`                  | `boolean` | `true`                       | 是否显示弹幕                |
+| `levels?`                        | `string`  | `''`                         | 直播清晰度数组[{bitrate:900000,file:"http://192.168.0.1:9000/live/rf94xjdq6.flv",width:720,height:480},{bitrate:113100,file:"http://192.168.0.1:9000/live/rf94xjdq6.flv",width:1280,height:720}]                |
