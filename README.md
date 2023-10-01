@@ -131,9 +131,10 @@
 | `showthumbnails?`                | `boolean` | `true`                       | 是否显示预览图                |
 | `bulletscreen?`                  | `boolean` | `true`                       | 是否显示弹幕                |
 | `levels?`                        | `string`  | `''`                         | 直播清晰度数组[{bitrate:900000,file:"http://192.168.0.1:9000/live/rf94xjdq6.flv",width:720,height:480},{bitrate:113100,file:"http://192.168.0.1:9000/live/rf94xjdq6.flv",width:1280,height:720}]             
-|
+
 
 ### React调用
+```html
 import React from "react";
 import { useImperativeHandle, useState, forwardRef } from "react";
 
@@ -249,3 +250,4 @@ const PowerPlayer = forwardRef((props: PlayerProps, ref) => {
 });
 
 export default PowerPlayer
+```
