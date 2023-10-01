@@ -130,4 +130,122 @@
 | `seekdisabled?`                  | `boolean` | `true`                       | 是否允许拖拽进度                |
 | `showthumbnails?`                | `boolean` | `true`                       | 是否显示预览图                |
 | `bulletscreen?`                  | `boolean` | `true`                       | 是否显示弹幕                |
-| `levels?`                        | `string`  | `''`                         | 直播清晰度数组[{bitrate:900000,file:"http://192.168.0.1:9000/live/rf94xjdq6.flv",width:720,height:480},{bitrate:113100,file:"http://192.168.0.1:9000/live/rf94xjdq6.flv",width:1280,height:720}]                |
+| `levels?`                        | `string`  | `''`                         | 直播清晰度数组[{bitrate:900000,file:"http://192.168.0.1:9000/live/rf94xjdq6.flv",width:720,height:480},{bitrate:113100,file:"http://192.168.0.1:9000/live/rf94xjdq6.flv",width:1280,height:720}]             
+|
+
+### React调用
+import React from "react";
+import { useImperativeHandle, useState, forwardRef } from "react";
+
+export type PlayerProps = {
+    file: string;
+    autostart: boolean;
+    provider: string;
+    seekdisabled: string;
+    preview: boolean;
+    prviewTime: boolean;
+    bulletscreen: boolean;
+    showthumbnails: boolean;
+    backtosee: boolean;
+    danmuscale: boolean;
+    gettimeurl: string;
+    marquees: [];
+    levels: [];
+    liveopened: boolean;
+    playbacktype: string;
+    hasAudio: boolean;
+    lastplayposition: number;
+    noactiontime: number;
+    pip: boolean;
+    title: string;
+    width: string;
+    height: string;
+    backupservers: string;
+    duration: number;
+    filesize: number;
+    weburlparam: string;
+    stretching: string;
+    logo: {};
+    controls: boolean;
+    powerdrmurl: string;
+    'controlbar.position': string;
+    'shortcuts.step': number;
+    'http.startparam': string;
+    siteid: string;
+    contentid: string;
+    fileid: string;
+    streamid: string;
+    code: string;
+    username: string;
+    rid: string;
+    headtime: number;
+    bottomtime: number;
+    starttime: number;
+    endtime: number;
+    tracker: string;
+    wstrackers: [];
+    rtmfpserver: string;
+    iceservers: [];
+    visible: boolean;
+};
+
+const PowerPlayer = forwardRef((props: PlayerProps, ref) => {
+    React.useEffect(() => {
+        //这是模拟componentDidMount钩子函数
+        if (props.visible) {
+            if (window.powerplayer('player') && props.file && props.file !== '') {
+                window.powerplayer('player').setup({
+                    modes: [{ type: "html5" }],
+                    baseUrl: '/powerplayer6/',
+                    file: props.file,
+                    playbacktype: 'LIVE',
+                    autostart: true,
+                    width: props.width,
+                    height: props.height,
+                });
+            }
+        }
+        return () => {//return出来的函数本来就是更新前，销毁前执行的函数，现在不监听任何状态，所以只在销毁前执行
+            //这是模拟componentWillUnmount钩子函数
+            removePlayer();
+        }
+    }, [])//第二个参数一定是一个空数组，因为如果不写会默认监听所有状态，这样写就不会监听任何状态，只在初始化时执行一次。
+
+    const removePlayer = () => {
+        if (window.powerplayer('player')) {
+            window.powerplayer('player').remove();
+        }
+    }
+    const stop = () => {
+        if (window.powerplayer('player')) {
+            window.powerplayer('player').stop();
+        }
+    }
+    const load = (url:string) => {
+        if (window.powerplayer('player') && url && url !== '') {
+            window.powerplayer('player').setup({
+                modes: [{ type: "html5" }],
+                baseUrl: '/powerplayer6/',
+                file: url,
+                playbacktype: 'LIVE',
+                autostart: true,
+                width: props.width,
+                height: props.height,
+            });
+        }       
+    }
+    // 给父组件返回方法
+    useImperativeHandle(ref, () => ({
+        removePlayer: removePlayer,
+        stop: stop,
+        load: load,
+    }));
+
+    return (
+        <>
+            <div id="player" style={{ width: '100%', height: '100%', margin: '0 auto', backgroundColor: '#000000' }}></div>
+        </>
+    );
+});
+
+export default PowerPlayer
